@@ -26,5 +26,10 @@ jobs:
     - name: Create a ZIP file
       run: ./pack.sh
 
-    - name: Upload ZIP to S3
-      run: aws s3 cp function.zip s3://pincodev1
+    - name: Update Lambda function code
+      run: |
+          aws lambda update-function-code \
+            --function-name fast-api \
+            --zip-file ./function.zip  
+            --publish \
+            --region ap-south-1  
